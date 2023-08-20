@@ -8,7 +8,7 @@ ADMIN_USERNAME="admin"
 ADMIN_PASSWORD="admin"
 
 
-echo " Log in and get session cookie"
+echo "* Log in and get session cookie"
 SESSION_COOKIE=$(curl -c cookies.txt -s -X POST \
   -H "Content-Type: application/json" \
   -d "{\"user\":\"$ADMIN_USERNAME\",\"email\":\"\",\"password\":\"$ADMIN_PASSWORD\"}" \
@@ -39,7 +39,7 @@ PAYLOAD=$(cat <<EOF
 EOF
 )
 
-echo " Add Prometheus data source using Grafana API with session cookie"
+echo "* Add Prometheus data source using Grafana API with session cookie"
 curl -b cookies.txt -s -X POST \
   -H "Content-Type: application/json" \
   -d "$PAYLOAD" \
@@ -65,6 +65,6 @@ DASHBOARD_ID=$(curl -b cookies.txt -s -X POST \
 echo "* Clean up cookies file"
 rm cookies.txt
 
-echo "Dashboard imported with ID: $DASHBOARD_ID"
+echo "* Dashboard imported with ID: $DASHBOARD_ID"
 
 ###################################
